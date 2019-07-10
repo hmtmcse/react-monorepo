@@ -4,3 +4,4 @@ node_modules
 packages/tm-react
 .idea
 yarn-error.log
+package-lock.json
