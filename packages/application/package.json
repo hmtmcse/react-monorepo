@@ -14,7 +14,7 @@
     "typescript": "3.5.3"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start-app": "webpack-dev-server",
     "build": "webpack"
   },
   "eslintConfig": {
