@@ -15,27 +15,36 @@ import {
 import {LoginLayoutJss} from "../../assets/login-layout-jss";
 import {TRProps} from "tm-react/src/artifacts/model/tr-model";
 import avatarImage from '../../assets/images/logo-192x192.jpg';
+import {TrFormDefinitionData} from "tm-react/src/artifacts/data/tr-form-definition-data";
 
-interface LoginUI extends TRProps{
+interface LoginUI extends TRProps {
     classes: any;
 }
 
 class LoginView extends TRComponent<LoginUI, TRComponentState> {
 
+    state: TRComponentState = new TRComponentState();
 
-    doLogin(event: any){
-
+    componentDidMount() {
+        this.addFormDefinition("email", new TrFormDefinitionData({
+            required: true,
+            errorMessage: "Please Enter Email Address",
+            isHelpTextAttribute: false
+        }));
+        this.addFormDefinition("password", new TrFormDefinitionData({
+            required: true,
+            errorMessage: "Please Enter Password",
+            isHelpTextAttribute: false
+        }));
     }
 
-    handleChange(event: any) {
+    doLogin(event: any) {
         event.preventDefault();
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value
-        });
-    };
+
+        console.log(this.state);
+        console.log("isValid: " + this.validateFormInput());
+        console.log(this.state);
+    }
 
     renderUI() {
         const {classes} = this.props;
@@ -46,16 +55,16 @@ class LoginView extends TRComponent<LoginUI, TRComponentState> {
                     <Paper className={classes.paper}>
                         <Avatar className={classes.avatar} src={avatarImage}/>
                         <Typography variant="h5">Login Here</Typography>
-                        <form onSubmit={this.doLogin} className={classes.form}>
+                        <form onSubmit={(event:any) => {this.doLogin(event)}} className={classes.form}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
-                                <Input id="email" required name="email" autoComplete="email" autoFocus
-                                       onChange={this.handleChange}/>
+                                <Input id="email" autoComplete="email"
+                                       autoFocus {...this.handleInputDataChange("email")} />
                             </FormControl>
-                            <FormControl margin="normal" required fullWidth>
+                            <FormControl margin="normal" fullWidth>
                                 <InputLabel htmlFor="password">Password</InputLabel>
-                                <Input required name="password" type="password" id="password"
-                                       onChange={this.handleChange}/>
+                                <Input name="password" type="password" id="password"
+                                       {...this.handleInputDataChange("password")} />
                             </FormControl>
                             <Button type="submit" variant="contained" fullWidth color="primary" children="Sign in"
                                     className={classes.submit}/>
