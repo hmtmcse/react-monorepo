@@ -41,11 +41,10 @@ class LoginView extends TRComponent<LoginUI, TRComponentState> {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                Hello
                 <main className={classes.layout}>
                     <Paper className={classes.paper}>
                         <Avatar className={classes.avatar} src="/assets/logo-192x192.jpg"/>
-                        <Typography variant="h2">Login Here</Typography>
+                        <Typography variant="h5">Login Here</Typography>
                         <form onSubmit={this.doLogin} className={classes.form}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -57,7 +56,7 @@ class LoginView extends TRComponent<LoginUI, TRComponentState> {
                                 <Input required name="password" type="password" id="password"
                                        onChange={this.handleChange}/>
                             </FormControl>
-                            <Button type="submit" fullWidth color="primary" children="Sign in"
+                            <Button type="submit" variant="contained" fullWidth color="primary" children="Sign in"
                                     className={classes.submit}/>
                         </form>
                     </Paper>
