@@ -14,6 +14,7 @@ import {
 } from "ui-tools/ui/ui-component";
 import {LoginLayoutJss} from "../../assets/login-layout-jss";
 import {TRProps} from "tm-react/src/artifacts/model/tr-model";
+import avatarImage from '../../assets/images/logo-192x192.jpg';
 
 interface LoginUI extends TRProps{
     classes: any;
@@ -43,7 +44,7 @@ class LoginView extends TRComponent<LoginUI, TRComponentState> {
                 <CssBaseline/>
                 <main className={classes.layout}>
                     <Paper className={classes.paper}>
-                        <Avatar className={classes.avatar} src="/assets/logo-192x192.jpg"/>
+                        <Avatar className={classes.avatar} src={avatarImage}/>
                         <Typography variant="h5">Login Here</Typography>
                         <form onSubmit={this.doLogin} className={classes.form}>
                             <FormControl margin="normal" required fullWidth>
