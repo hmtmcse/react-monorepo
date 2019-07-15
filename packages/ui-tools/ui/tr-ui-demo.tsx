@@ -7,10 +7,12 @@ import {TRDropdownDataHelper} from "./tr-ui-data";
 import TRDropdown from "./tr-dropdown";
 import TRDialog from "./tr-dialog";
 import {TRProgress} from "./tr-progress";
+import TRAlertDialog from "./tr-alert-dialog";
 
 class DemoState implements TRState{
     public showFlashMessage: boolean = false;
     public showDialog: boolean = false;
+    public showAlertDialog: boolean = false;
     public flashMessage: string = "This is Flash Message";
     public flashMessageVariant: Variant = Variant.error;
 }
@@ -44,6 +46,27 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
             return {showDialog: !state.showDialog};
         })
     }
+
+    showHideDialogAlertBox(event: any) {
+        this.setState((state: any) =>{
+            return {showAlertDialog: !state.showAlertDialog};
+        })
+    }
+
+    dialogAlertBoxCancel(event: any) {
+        this.setState((state: any) =>{
+            return {showAlertDialog: !state.showAlertDialog};
+        })
+        console.log("Cancel")
+    }
+
+    dialogAlertBoxOkay(event: any) {
+        this.setState((state: any) =>{
+            return {showAlertDialog: !state.showAlertDialog};
+        })
+        console.log("Okay")
+    }
+
 
     private title(title: string) {
         return (<React.Fragment>
@@ -101,7 +124,20 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
                       onCloseFunction={{click(event: any, onClickData: any): void {
                               component.showHideDialogBox(event)
                 }}}/>
+
             {this.title("Alert Dialog")}
+            <ButtonGroup
+                variant="contained"
+                color="primary">
+                <Button onClick={(event:any) =>{this.showHideDialogAlertBox(event)}}>Show Alert Dialog</Button>
+            </ButtonGroup>
+            <TRAlertDialog isOpen={this.state.showAlertDialog} message="Are you sure want to delete?"
+                           cancelFunction={{click(event: any, onClickData: any): void {
+                               component.dialogAlertBoxCancel(event);
+                }}} okayFunction={{click(event: any, onClickData: any): void {
+                    component.dialogAlertBoxOkay(event);
+                }}}/>
+
 
             {this.title("Progress Bar")}
             {TRProgress.linear(true)}
