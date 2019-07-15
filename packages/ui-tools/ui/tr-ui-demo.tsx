@@ -6,9 +6,11 @@ import {Button, ButtonGroup, Divider} from "./ui-component";
 import {TRDropdownDataHelper} from "./tr-ui-data";
 import TRDropdown from "./tr-dropdown";
 import TRDialog from "./tr-dialog";
+import {TRProgress} from "./tr-progress";
 
 class DemoState implements TRState{
     public showFlashMessage: boolean = false;
+    public showDialog: boolean = false;
     public flashMessage: string = "This is Flash Message";
     public flashMessageVariant: Variant = Variant.error;
 }
@@ -24,7 +26,9 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
     state:DemoState = new DemoState();
 
     closeFlashMessage(event: any) {
-        this.setState({showFlashMessage: false})
+        this.setState({
+            showFlashMessage: false
+        })
     }
 
     showFlashMessage(event: any, flashMessageVariant: Variant) {
@@ -35,6 +39,11 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
         })
     }
 
+    showHideDialogBox(event: any) {
+        this.setState((state: any) =>{
+            return {showDialog: !state.showDialog};
+        })
+    }
 
     private title(title: string) {
         return (<React.Fragment>
@@ -60,8 +69,11 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
         }, {name: "C"});
         // Dropdown
 
-
+        const component = this;
         return (<React.Fragment>
+
+            {this.title("Dropdown")}
+            <TRDropdown actions={dropdownList.getList()}/>
 
             {this.title("Flash Message")}
             <ButtonGroup
@@ -76,17 +88,30 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
 
 
 
-            {this.title("Dropdown")}
-            <TRDropdown actions={dropdownList.getList()}/>
+
 
 
             {this.title("Dialog")}
-            <TRDialog isOpen={true} children={<h1>This is Body Content of the Dialog Box</h1>}  title="Hmm Title" autoClose={true}/>
+            <ButtonGroup
+                variant="contained"
+                color="primary">
+                <Button onClick={(event:any) =>{this.showHideDialogBox(event)}}>Show Dialog Box</Button>
+            </ButtonGroup>
+            <TRDialog isOpen={this.state.showDialog} children={<h1>This is Body Content of the Dialog Box</h1>}  title="Hmm Title" autoClose={true}
+                      onCloseFunction={{click(event: any, onClickData: any): void {
+                              component.showHideDialogBox(event)
+                }}}/>
             {this.title("Alert Dialog")}
+
+            {this.title("Progress Bar")}
+            {TRProgress.linear(true)}
 
             {this.title("Table Action")}
             {this.title("Table Header")}
             {this.title("Table")}
+            {this.title("Pagination")}
+            {this.title("Navigation")}
+            {this.title("Searchable Dropdown")}
 
         </React.Fragment>);
     }

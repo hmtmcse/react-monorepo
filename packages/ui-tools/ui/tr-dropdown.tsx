@@ -55,9 +55,7 @@ export default class TRDropdown extends TRReactComponent<TRTableActionProps, TRT
             </Button>
             <Popper open={this.state.open}
                     anchorEl={this.state.anchorRef}
-                    keepMounted
-                    transition
-                    disablePortal>
+                    transition>
                 {({TransitionProps, placement}) => (
                     <Grow
                         {...TransitionProps}

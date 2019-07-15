@@ -67,6 +67,12 @@ export default class TRDialog extends TRReactComponent<TRDialogProps, TRDialogSt
         }
     }
 
+    componentDidUpdate(prevProps: TRDialogProps) {
+        if (this.props.isOpen !== prevProps.isOpen) {
+            this.setState({isOpen: this.props.isOpen})
+        }
+    }
+
     render() {
         const {maxWidth, title, children, action, fullScreen, fullWidth} = this.props;
         return (<React.Fragment>
