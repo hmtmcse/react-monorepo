@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/close';
 import ClearIcon from '@material-ui/icons/clear';
 import ListIcon from '@material-ui/icons/List';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import StopIcon from '@material-ui/icons/Stop';
 export type WithStyles = WithStyles;
 export type Theme = Theme;
 
@@ -51,6 +52,7 @@ export {
     ClearIcon,
     InfoIcon,
     MoreVertIcon,
+    StopIcon,
     ListIcon
 };
 

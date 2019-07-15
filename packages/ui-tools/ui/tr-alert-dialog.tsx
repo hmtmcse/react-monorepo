@@ -10,7 +10,7 @@ class TRAlertDialogState implements TRState {
     public isOpen: boolean = false;
 }
 
-interface TRAlertDialogProps extends TRProps {
+export interface TRAlertDialogProps extends TRProps {
     isOpen: boolean;
     title?: string;
     message: string;
