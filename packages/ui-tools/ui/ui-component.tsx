@@ -5,6 +5,8 @@ import WarningIcon from '@material-ui/icons/Warning';
 import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/close';
 import ClearIcon from '@material-ui/icons/clear';
+import ListIcon from '@material-ui/icons/List';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 export type WithStyles = WithStyles;
 export type Theme = Theme;
 
@@ -28,6 +30,14 @@ export {
     IconButton as IconButton,
     Fade as Fade,
     LinearProgress as LinearProgress,
+    Popper as Popper,
+    Grow as Grow,
+    ClickAwayListener as ClickAwayListener,
+    MenuList as MenuList,
+    MenuItem as MenuItem,
+    Menu as Menu,
+    Divider as Divider,
+    Dialog as Dialog, DialogTitle as DialogTitle, DialogActions as DialogActions, DialogContent as DialogContent
 } from "@material-ui/core";
 
 
@@ -38,7 +48,9 @@ export {
     WarningIcon,
     CloseIcon,
     ClearIcon,
-    InfoIcon
+    InfoIcon,
+    MoreVertIcon,
+    ListIcon
 };
 
 
