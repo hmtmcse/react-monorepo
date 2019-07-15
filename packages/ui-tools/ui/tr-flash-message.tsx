@@ -3,7 +3,7 @@ import {TRProps, TRState} from "tm-react/src/artifacts/model/tr-model";
 import classNames from 'classnames';
 import {
     amber,
-    CheckCircleIcon, CloseIcon, createStyles, ErrorIcon, green,
+    CheckCircleIcon, ClearIcon, CloseIcon, createStyles, ErrorIcon, green,
     IconButton, InfoIcon, Snackbar,
     SnackbarContent, Theme, WarningIcon, withStyles
 } from "./ui-component";

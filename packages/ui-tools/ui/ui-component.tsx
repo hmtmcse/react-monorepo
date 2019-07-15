@@ -4,11 +4,13 @@ import ErrorIcon from '@material-ui/icons/Error';
 import WarningIcon from '@material-ui/icons/Warning';
 import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/close';
+import ClearIcon from '@material-ui/icons/clear';
 export type WithStyles = WithStyles;
 export type Theme = Theme;
 
 export {
     Button as Button,
+    ButtonGroup as ButtonGroup,
     Paper as Paper,
     Typography as Typography,
     TextField as TextField,
@@ -35,6 +37,7 @@ export {
     ErrorIcon,
     WarningIcon,
     CloseIcon,
+    ClearIcon,
     InfoIcon
 };
 

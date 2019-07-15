@@ -41,8 +41,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'TM React Application',
             chunksSortMode: 'none',
-            template: './public/index.html',
-            favicon: './public/favicon.ico',
+            template: './index.html',
             minify: true
         }),
         new AsyncChunkNames()
