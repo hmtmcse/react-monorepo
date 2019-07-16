@@ -2,13 +2,14 @@ import TRReactComponent from "tm-react/src/artifacts/framework/tr-react-componen
 import {TRProps, TRState} from "tm-react/src/artifacts/model/tr-model";
 import React from "react";
 import TRFlashMessage, {Variant} from "./tr-flash-message";
-import {Button, ButtonGroup, Divider} from "./ui-component";
-import {TRDropdownDataHelper, TRTableActionDataHelper} from "./tr-ui-data";
+import {Button, ButtonGroup} from "./ui-component";
+import {TRDropdownDataHelper, TRTableActionDataHelper, TRTableHeaderDataHelper} from "./tr-ui-data";
 import TRDropdown from "./tr-dropdown";
 import TRDialog from "./tr-dialog";
 import {TRProgress} from "./tr-progress";
 import TRAlertDialog from "./tr-alert-dialog";
 import TRTableAction from "./tr-table-action";
+import TRTableHeader, {SortDirection} from "./tr-table-header";
 
 class DemoState implements TRState{
     public showFlashMessage: boolean = false;
@@ -16,6 +17,8 @@ class DemoState implements TRState{
     public showAlertDialog: boolean = false;
     public flashMessage: string = "This is Flash Message";
     public flashMessageVariant: Variant = Variant.error;
+    public orderBy: string = "id";
+    public sortDirection: SortDirection = SortDirection.descending;
 }
 
 interface DemoProps extends TRProps{
@@ -118,6 +121,11 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
                     console.log("Calcalled");
                 }
             });
+
+
+        let tableHeader = TRTableHeaderDataHelper.init("Name", "name", true, "Sort By Name");
+
+
         const component = this;
         return (<React.Fragment>
 
@@ -134,9 +142,6 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
                 <Button onClick={(event:any) =>{this.showFlashMessage(event, Variant.warning)}}>Warning Flash</Button>
             </ButtonGroup>
             <TRFlashMessage isOpen={this.state.showFlashMessage} message={this.state.flashMessage} variant={this.state.flashMessageVariant} onCloseFunction={(event:any) =>{this.closeFlashMessage(event)}}/>
-
-
-
 
 
 
@@ -173,6 +178,28 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
 
 
             {this.title("Table Header")}
+            <TRTableHeader headers={tableHeader.getHeaders()}
+                           orderBy={this.state.orderBy}
+                           sortDirection={this.state.sortDirection}
+                           enableActionColumn={false}
+                           clickForSortFunction={
+                               {
+                                   click(event: any, onClickData: any): void {
+                                       console.log("Clicked");
+                                       if (component.state.sortDirection === SortDirection.ascending){
+                                           component.setState({
+                                               sortDirection: SortDirection.descending
+                                           })
+                                       } else{
+                                           component.setState({
+                                               sortDirection: SortDirection.ascending
+                                           })
+                                       }
+
+                                   }
+                               }
+                           }/>
+
             {this.title("Table")}
             {this.title("Pagination")}
             {this.title("Navigation")}

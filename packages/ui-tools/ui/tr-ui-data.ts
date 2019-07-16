@@ -159,18 +159,75 @@ class TRTableActionDataHelper {
     }
 
 }
-
 // TABLE ACTION DATA
 
 
 // TABLE HEADER DATA
+export enum Align {
+    inherit = 'inherit',
+    left = 'left',
+    right = 'right',
+    center = 'center',
+    justify = 'justify',
+}
+
 class TRTableHeaderData {
-    public id?: any;
-    public numeric: boolean = false;
+    public align: Align = Align.center;
     public disablePadding: boolean = false;
     public enableSort: boolean = true;
     public label?: string;
-    public title?: string;
+    public tooltip?: string;
+    public fieldName?: string;
+
+
+
+    constructor(label: string, fieldName: string, enableSort: boolean = true, tooltip?: string) {
+        this.fieldName = fieldName;
+        this.enableSort = enableSort;
+        this.label = label;
+        this.tooltip = tooltip;
+    }
+
+    public setAlign(align: Align): TRTableHeaderData{
+        this.align = align;
+        return this;
+    }
+
+    public setDisablePadding(disablePadding: boolean): TRTableHeaderData{
+        this.disablePadding = disablePadding;
+        return this;
+    }
+
+
+    public setEnableSort(enableSort: boolean): TRTableHeaderData{
+        this.enableSort = enableSort;
+        return this;
+    }
+
+    public setTooltip(tooltip: string): TRTableHeaderData{
+        this.tooltip = tooltip;
+        return this;
+    }
+
+}
+
+class TRTableHeaderDataHelper {
+    private headers: Array<TRTableHeaderData> = [];
+
+    public add(data: TRTableHeaderData): TRTableHeaderDataHelper {
+        this.headers.push(data);
+        return this;
+    }
+
+    public getHeaders(): Array<TRTableHeaderData> {
+        return this.headers;
+    }
+
+    public static init(label: string, fieldName: string, enableSort: boolean = true, tooltip?: string):TRTableHeaderDataHelper {
+        let init: TRTableHeaderDataHelper = new TRTableHeaderDataHelper();
+        init.add(new TRTableHeaderData(label, fieldName, enableSort, tooltip));
+        return init;
+    }
 }
 
 // TABLE HEADER DATA
@@ -208,5 +265,7 @@ export {
     TRDropdownDataHelper,
     TRTableActionDataHelper,
     TRTableActionData,
-    TRConfirmAlertDialogProps
+    TRConfirmAlertDialogProps,
+    TRTableHeaderDataHelper,
+    TRTableHeaderData
 }
