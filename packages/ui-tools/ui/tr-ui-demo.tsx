@@ -94,8 +94,30 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
         // Dropdown
 
 
-        let tableAction:TRTableActionDataHelper = new TRTableActionDataHelper();
+        let tableAction: TRTableActionDataHelper = TRTableActionDataHelper.commonActions();
+        tableAction.getAction("View").setAction(
+            {
+                click(event: any, onClickData: any): void {
+                    console.log("action Performed.")
+                    console.log(onClickData)
+                }
+            }
+        ).setCallbackData({name: "Touhid Mia"});
 
+        tableAction.getAction("Delete").setAction(
+            {
+                click(event: any, onClickData: any): void {
+                    console.log("Deleted Confirmed");
+                    console.log(onClickData)
+                }
+            }
+        ).setCallbackData({name: "Delete"})
+            .updateConfirmationCancelAction(
+            {
+                click(event: any, onClickData: any): void {
+                    console.log("Calcalled");
+                }
+            });
         const component = this;
         return (<React.Fragment>
 
@@ -147,7 +169,7 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
             {TRProgress.linear(true)}
 
             {this.title("Table Action")}
-            <TRTableAction actions={TRTableActionDataHelper.commonActionMap()}/>
+            <TRTableAction actions={tableAction.getMap()}/>
 
 
             {this.title("Table Header")}

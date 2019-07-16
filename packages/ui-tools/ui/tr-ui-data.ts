@@ -54,12 +54,12 @@ class TRDropdownDataHelper {
 
 class TRConfirmAlertDialogProps {
     public cancelFunction?: OnActionFunction;
-    public cancelLabel?: string;
-    public message?: string;
+    public cancelLabel?: string = "Cancel";
+    public message: string = "Seems Something happening wrong!";
     public okayFunction?: OnActionFunction;
-    public okayLabel?: string;
+    public okayLabel?: string = "Confirm";
     public onCloseCallbackData?: any;
-    public title?: string;
+    public title?: string = "Confirm";
 
 }
 
@@ -79,8 +79,33 @@ class TRTableActionData {
         this.icon = icon;
     }
 
+    public setAction(action: OnActionFunction): TRTableActionData{
+        this.action = action;
+        return this;
+    }
+
+    public setCallbackData(actionCallbackData: any): TRTableActionData{
+        this.actionCallbackData = actionCallbackData;
+        return this;
+    }
+
     public addActionCallbackData(actionCallbackData: any): TRTableActionData {
         this.actionCallbackData = actionCallbackData;
+        return this;
+    }
+
+    public updateConfirmationAction(okayFunction?: OnActionFunction, cancelFunction?: OnActionFunction): TRTableActionData{
+        if (this.confirmation){
+            this.confirmation.okayFunction = okayFunction;
+            this.confirmation.cancelFunction = cancelFunction;
+        }
+        return this;
+    }
+
+    public updateConfirmationCancelAction(cancelFunction: OnActionFunction): TRTableActionData{
+        if (this.confirmation){
+            this.confirmation.cancelFunction = cancelFunction;
+        }
         return this;
     }
 
@@ -102,6 +127,15 @@ class TRTableActionData {
 class TRTableActionDataHelper {
 
     private actions: Map<string, TRTableActionData> = new Map<string, TRTableActionData>();
+
+    public getAction(name: string): any{
+        return this.actions.get(name);
+    }
+
+    public updateAction(name: string, data: TRTableActionData): TRTableActionDataHelper {
+        this.actions.set(name, data);
+        return this;
+    }
 
     public getMap(): Map<string, TRTableActionData> {
         return this.actions;
