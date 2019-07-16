@@ -1,5 +1,4 @@
-import {StopIcon} from "./ui-component";
-import {TRAlertDialogProps} from "./tr-alert-dialog";
+import {DeleteIcon, EditIcon, StopIcon, VisibilityIcon} from "./ui-component";
 
 export interface OnActionFunction {
     click(event: any, onClickData: any): void;
@@ -41,8 +40,28 @@ class TRDropdownDataHelper {
         return new TRDropdownDataHelper();
     }
 }
+
 // DROP DOWN DATA
 
+
+// {
+//     [...dateJobMap.keys()].map(jobsForDate =>
+//         jobsForDate.map(job => (
+//             <TruckJobComp job = { job } />
+// ))
+// )
+// }
+
+class TRConfirmAlertDialogProps {
+    public cancelFunction?: OnActionFunction;
+    public cancelLabel?: string;
+    public message?: string;
+    public okayFunction?: OnActionFunction;
+    public okayLabel?: string;
+    public onCloseCallbackData?: any;
+    public title?: string;
+
+}
 
 // TABLE ACTION DATA
 class TRTableActionData {
@@ -51,7 +70,60 @@ class TRTableActionData {
     public action?: OnActionFunction;
     public actionCallbackData?: any;
     public icon: any = StopIcon;
-    public confirmation?: TRAlertDialogProps;
+    public confirmation?: TRConfirmAlertDialogProps;
+
+
+    constructor(label: string, icon?: any, action?: OnActionFunction) {
+        this.label = label;
+        this.action = action;
+        this.icon = icon;
+    }
+
+    public addActionCallbackData(actionCallbackData: any): TRTableActionData {
+        this.actionCallbackData = actionCallbackData;
+        return this;
+    }
+
+    public addConfirmation(): TRTableActionData {
+        let confirmation = new TRConfirmAlertDialogProps()
+        confirmation.title = "Confirm";
+        confirmation.message = "Are you sure want to delete?";
+        confirmation.okayLabel = "Confirm";
+        confirmation.cancelLabel = "Cancel";
+        this.confirmation = confirmation;
+        return this;
+    }
+
+    public static instance(label: string, icon?: any, action?: OnActionFunction) {
+        return new TRTableActionData(label, icon, action)
+    }
+}
+
+class TRTableActionDataHelper {
+
+    private actions: Map<string, TRTableActionData> = new Map<string, TRTableActionData>();
+
+    public getMap(): Map<string, TRTableActionData> {
+        return this.actions;
+    }
+
+    public addAction(label: string): TRTableActionData | undefined {
+        this.actions.set(label, TRTableActionData.instance(label));
+        return this.actions.get(label);
+    }
+
+    public static commonActions(actionCallbackData?: any) {
+        let trTableActionDataHelper: TRTableActionDataHelper = new TRTableActionDataHelper();
+        trTableActionDataHelper.actions.set("View", new TRTableActionData("View", VisibilityIcon).addActionCallbackData(actionCallbackData));
+        trTableActionDataHelper.actions.set("Edit", new TRTableActionData("Edit", EditIcon).addActionCallbackData(actionCallbackData));
+        trTableActionDataHelper.actions.set("Delete", new TRTableActionData("Delete", DeleteIcon).addActionCallbackData(actionCallbackData).addConfirmation());
+        return trTableActionDataHelper;
+    }
+
+    public static commonActionMap(actionCallbackData?: any) {
+        return this.commonActions(actionCallbackData).getMap();
+    }
+
 }
 
 // TABLE ACTION DATA
@@ -66,6 +138,7 @@ class TRTableHeaderData {
     public label?: string;
     public title?: string;
 }
+
 // TABLE HEADER DATA
 
 
@@ -79,6 +152,7 @@ class TRPaginationData {
     public nextButtonProps: any = "Next Page";
     public itemPerPageDropdown: Array<number> = [10, 20, 50, 100, 500, 1000];
 }
+
 // PAGINATION DATA
 
 // SELECT DATA
@@ -91,10 +165,14 @@ class TRSelectData {
     public nextButtonProps: any = "Next Page";
     public itemPerPageDropdown: Array<number> = [10, 20, 50, 100, 500, 1000];
 }
+
 // SELECT DATA
 
 
 export {
     TRDropdownData,
-    TRDropdownDataHelper
+    TRDropdownDataHelper,
+    TRTableActionDataHelper,
+    TRTableActionData,
+    TRConfirmAlertDialogProps
 }

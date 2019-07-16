@@ -8,6 +8,9 @@ import ClearIcon from '@material-ui/icons/clear';
 import ListIcon from '@material-ui/icons/List';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import StopIcon from '@material-ui/icons/Stop';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 export type WithStyles = WithStyles;
 export type Theme = Theme;
 
@@ -38,6 +41,7 @@ export {
     MenuItem as MenuItem,
     Menu as Menu,
     Divider as Divider,
+    ListItemIcon as ListItemIcon,
     Dialog as Dialog, DialogTitle as DialogTitle, DialogActions as DialogActions, DialogContent as DialogContent, DialogContentText as DialogContentText
 
 } from "@material-ui/core";
@@ -53,6 +57,9 @@ export {
     InfoIcon,
     MoreVertIcon,
     StopIcon,
+    EditIcon,
+    DeleteIcon,
+    VisibilityIcon,
     ListIcon
 };
 

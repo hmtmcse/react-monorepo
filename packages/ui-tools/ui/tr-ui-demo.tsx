@@ -3,11 +3,12 @@ import {TRProps, TRState} from "tm-react/src/artifacts/model/tr-model";
 import React from "react";
 import TRFlashMessage, {Variant} from "./tr-flash-message";
 import {Button, ButtonGroup, Divider} from "./ui-component";
-import {TRDropdownDataHelper} from "./tr-ui-data";
+import {TRDropdownDataHelper, TRTableActionDataHelper} from "./tr-ui-data";
 import TRDropdown from "./tr-dropdown";
 import TRDialog from "./tr-dialog";
 import {TRProgress} from "./tr-progress";
 import TRAlertDialog from "./tr-alert-dialog";
+import TRTableAction from "./tr-table-action";
 
 class DemoState implements TRState{
     public showFlashMessage: boolean = false;
@@ -92,6 +93,9 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
         }, {name: "C"});
         // Dropdown
 
+
+        let tableAction:TRTableActionDataHelper = new TRTableActionDataHelper();
+
         const component = this;
         return (<React.Fragment>
 
@@ -143,6 +147,9 @@ export default class TrUiDemo extends TRReactComponent<DemoProps, DemoState> {
             {TRProgress.linear(true)}
 
             {this.title("Table Action")}
+            <TRTableAction actions={TRTableActionDataHelper.commonActionMap()}/>
+
+
             {this.title("Table Header")}
             {this.title("Table")}
             {this.title("Pagination")}

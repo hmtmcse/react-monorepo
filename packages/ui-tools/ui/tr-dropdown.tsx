@@ -48,7 +48,7 @@ export default class TRDropdown extends TRReactComponent<TRTableActionProps, TRT
             <Button
                 ref={this.state.anchorRef}
                 aria-label="More"
-                aria-owns={open ? 'long-menu' : undefined}
+                aria-owns={this.state.open ? 'long-menu' : undefined}
                 aria-haspopup="true"
                 onClick={(event: any) => {this.handleClick(event)}}>
                 <MoreVertIcon/>
