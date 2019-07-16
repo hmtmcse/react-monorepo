@@ -2,6 +2,7 @@ yarn.lock
 build
 node_modules
 packages/tm-react
+packages/react-mui-ui
 .idea
 yarn-error.log
 package-lock.json

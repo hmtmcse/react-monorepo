@@ -1,6 +1,7 @@
 PROJECT_NAME="react-monorepo"
 PACKAGES="packages"
 TM_REACT="tm-react"
+MUI_UI="react-mui-ui"
 echo "Welcome to React Mono Repo Project";
 echo "-------------------------------------------------------------"
 echo "-------------------------------------------------------------"
@@ -14,6 +15,7 @@ git clone https://github.com/hmtmcse/react-monorepo.git
 
 cd "$PROJECT_NAME/$PACKAGES"
 git clone https://github.com/hmtmcse/tm-react.git  $TM_REACT
+git clone https://github.com/hmtmcse/react-mui-ui.git  $MUI_UI
 
 cd "$TM_REACT"
 

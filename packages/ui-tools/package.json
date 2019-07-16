@@ -16,7 +16,7 @@
     "typescript": "3.5.3"
   },
   "scripts": {
-    "start-ui": "webpack-dev-server",
+    "xstart-ui": "webpack-dev-server",
     "build": "webpack"
   },
   "eslintConfig": {

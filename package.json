@@ -11,9 +11,9 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "lerna run start --stream",
     "start-app": "lerna run start-app --stream",
     "start-ui": "lerna run start-ui --stream",
+    "docz-start": "lerna run docz-start --stream",
     "start-demo": "lerna run start-demo --stream"
   },
   "devDependencies": {
